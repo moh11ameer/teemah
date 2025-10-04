@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Fateemah 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Pacifico', cursive;
+      background: linear-gradient(to bottom right, #fcd5ce, #fae1dd);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .hidden { display: none; }
+    .card, .login-card {
+      background: white;
+      max-width: 600px;
+      width: 100%;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      text-align: center;
+      box-shadow: 0 10px 35px rgba(255,182,193,0.5);
+      position: relative;
+      z-index: 10;
+    }
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #ffb6c1;
+      margin-bottom: 1rem;
+    }
+    .final-text {
+      font-size: 1.5rem;
+      color: #d63384;
+      margin-bottom: 1.5rem;
+    }
+    .btn {
+      background: #ffb6c1;
+      color: white;
+      border: none;
+      border-radius: 2rem;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      margin: 0.5rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #ff69b4;
+    }
+    input[type="password"], textarea {
+      width: 90%;
+      padding: 0.5rem;
+      border-radius: 1rem;
+      border: 2px solid #ffb6c1;
+      margin: 1rem 0;
+      font-family: 'Pacifico', cursive;
+    }
+    #musicControl {
+      background: #f9a8d4;
+    }
+    @media (max-width: 480px) {
+      .card, .login-card {
+        margin: 2vh 1rem;
+        padding: 1.5rem;
+      }
+      .final-text {
+        font-size: 1.2rem;
+      }
+      .profile-pic {
+        width: 120px;
+        height: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-card" id="loginCard">
+  <h2>Enter Secret Password 🔐</h2>
+  <input type="password" id="passwordInput" placeholder="Password...">
+  <br>
+  <button class="btn" onclick="checkPassword()">Enter</button>
+  <div id="errorMsg" style="color:#ff6b6b; margin-top:1rem;"></div>
+</div>
+
+<div class="card hidden" id="mainCard">
+  <img src="teemah.jpg" alt="Fateemah" class="profile-pic">
+  <div class="final-text" id="textMessage">Fateemah, you light up my world! 🌸💖</div>
+  <button class="btn" onclick="nextMessage()">Continue 💌</button>
+  <button class="btn" id="musicControl" onclick="toggleMusic()">Play Music 🎶</button>
+
+  <audio id="bgMusic" src="Dj AB.mp3" loop></audio>
+</div>
+
+<script>
+const messages = [
+  "Every moment talking to you feels like sunshine! ☀️",
+  "You're truly one of a kind 💎",
+  "In all the world there is no heart for me like yours, and there is no love for you like mine. 🤍",
+  "I don’t know if you’re secretly a magician, but the way you make me feel... it’s a kind of magic I’ve never felt with anyone else. 🪄💖",
+  "Whenever you ever feel down or not enough, just send me one message... and I’ll remind you exactly how loyalty and respect are meant to be shown to a beautiful soul like you. 🌸🤍",
+  "Stay awesome, Fateemah! 🌸",
+  "I'll always be cheering for you! 🫶",
+  "from Muhd(Moh_Amaer)"
+];
+let msgIndex = 0;
+
+function nextMessage() {
+  const textDiv = document.getElementById('textMessage');
+  msgIndex++;
+  if (msgIndex < messages.length) {
+    textDiv.textContent = messages[msgIndex];
+  } else {
+    textDiv.textContent = "That's all for now! 💖";
+  }
+}
+
+function toggleMusic() {
+  const music = document.getElementById('bgMusic');
+  const btn = document.getElementById('musicControl');
+  if (music.paused) {
+    music.play();
+    btn.textContent = "Pause 🎵";
+  } else {
+    music.pause();
+    btn.textContent = "Play 🎶";
+  }
+}
+
+function checkPassword() {
+  const input = document.getElementById('passwordInput').value;
+  const loginCard = document.getElementById('loginCard');
+  const mainCard = document.getElementById('mainCard');
+  const errorMsg = document.getElementById('errorMsg');
+
+  if (input === 'Teemah') {
+    loginCard.classList.add('hidden');
+    mainCard.classList.remove('hidden');
+  } else {
+    errorMsg.textContent = "Oops! Retry My Ameera 🙈";
+  }
+}
+
+function downloadReply() {
+  const reply = document.getElementById('reply').value.trim();
+  if (!reply) return;
+  const blob = new Blob([reply], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'aisha_reply.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+
+</body>
+</html>
